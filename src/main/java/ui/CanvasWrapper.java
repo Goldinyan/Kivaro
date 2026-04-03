@@ -6,11 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ScreenPanel extends JPanel {
+public class CanvasWrapper extends JPanel {
 
     private final EditorContext ctx;
 
-    public ScreenPanel(EditorContext ctx) {
+    public CanvasWrapper(EditorContext ctx) {
         this.ctx = ctx;
 
         setFocusable(true);
@@ -42,8 +42,6 @@ public class ScreenPanel extends JPanel {
         };
         addMouseMotionListener(mouseMotionListener);
 
-        // Main Loop
-        new Timer(16, e -> repaint()).start();
     }
 
     @Override

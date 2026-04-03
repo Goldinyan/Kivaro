@@ -1,7 +1,5 @@
 package main.java.ui;
 
-import main.java.ui.ScreenPanel;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -42,10 +40,10 @@ public class ColorPickerPanel extends JPanel implements MouseListener, MouseMoti
     private static final int LABEL_OFFSET = 45;
     private static final int PANEL_WIDTH = 200;
 
-    private final ScreenPanel screenPanel;
+    private final CanvasWrapper canvasWrapper;
 
-    public ColorPickerPanel(ScreenPanel screenPanel) {
-        this.screenPanel = screenPanel;
+    public ColorPickerPanel(CanvasWrapper canvasWrapper) {
+        this.canvasWrapper = canvasWrapper;
         setPreferredSize(new Dimension(PANEL_WIDTH, 600));
         setBackground(Color.BLACK);
         addMouseListener(this);

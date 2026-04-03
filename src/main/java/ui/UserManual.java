@@ -1,4 +1,4 @@
-import main.java.ui.ScreenPanel;
+import main.java.ui.CanvasWrapper;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +7,7 @@ import javax.swing.*;
 public class UserManual extends JPanel implements MouseListener, MouseMotionListener {
 
     private String[][] keybinds = {{"X Align", "Align the ..."}};
-    private ScreenPanel screenPanel;
+    private CanvasWrapper canvasWrapper;
     private int hoveredColorIndex = -1;
 
     private static final int PANEL_WIDTH = 490;
@@ -15,8 +15,8 @@ public class UserManual extends JPanel implements MouseListener, MouseMotionList
 
 
 
-    public UserManual(ScreenPanel screenPanel){
-        this.screenPanel = screenPanel;
+    public UserManual(CanvasWrapper canvasWrapper){
+        this.canvasWrapper = canvasWrapper;
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         setBackground(Color.BLACK);
         addMouseListener(this);

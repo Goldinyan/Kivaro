@@ -35,27 +35,40 @@ public class Canvas {
 
 
     public void draw_grid(Graphics g) {
-        int WIDTH = ctx.layers.getActive().getImage().getWidth();
-        int HEIGHT = ctx.layers.getActive().getImage().getHeight();
-        int GRID_CELL_SIZE = ctx.ctxManager.canvasCtx.GRID_CELL_SIZE;
-
+        int cell = ctx.ctxManager.canvasCtx.GRID_CELL_SIZE;
         float zoom = ctx.ctxManager.canvasCtx.zoom;
+
         int worldX = ctx.ctxManager.canvasCtx.worldX;
         int worldY = ctx.ctxManager.canvasCtx.worldY;
 
+        int width = ctx.layers.getActive().getImage().getWidth();
+        int height = ctx.layers.getActive().getImage().getHeight();
+
+        if(width == 0 || height == 0){
+            return;
+        }
 
         Theme theme = ctx.ctxManager.colorCtx.getTheme();
 
-        int i = 0;
+        int screenCell = Math.max(1, (int)(cell * zoom));
 
-        for(int x = worldX; x < WIDTH + worldX; x += GRID_CELL_SIZE){
-            i = (x / GRID_CELL_SIZE) % 2;
+        int startCellX = Math.floorDiv(worldX, cell);
+        int startCellY = Math.floorDiv(worldY, cell);
 
-            for(int y = worldY; y < HEIGHT + worldY; y += GRID_CELL_SIZE){
-                g.setColor(i % 2 == 0 ? theme.grid1 : theme.grid2);
-                g.fillRect(x, y, GRID_CELL_SIZE, GRID_CELL_SIZE);
-                i++;
+        // System.out.println(startCellX + " " + startCellY);
+
+        for (int cx = startCellX; cx * cell < width; cx++) {
+            for (int cy = startCellY; cy * cell < height; cy++) {
+
+                boolean even = ((cx + cy) & 1) == 0;
+                g.setColor(even ? theme.grid1 : theme.grid2);
+
+                int screenX = (int)((cx * cell - worldX) * zoom);
+                int screenY = (int)((cy * cell - worldY) * zoom);
+
+                g.fillRect(screenX, screenY, screenCell, screenCell);
             }
         }
     }
+
 }
