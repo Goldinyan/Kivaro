@@ -61,7 +61,7 @@ public class UIManager {
             panel.setPreferredSize(new Dimension(width, height));
         }
         
-        System.out.println("✓ Panel registriert: " + id + " (" + width + "x" + height + ")");
+        System.out.println("Panel registriert: " + id + " (" + width + "x" + height + ")");
     }
     
     /**
@@ -79,7 +79,7 @@ public class UIManager {
         panelSizes.put(id, new Dimension(0, 0));
         panelLayouts.put(id, panel.getLayout());
         
-        System.out.println("✓ Panel registriert: " + id + " (flexibel)");
+        System.out.println("Panel registriert: " + id + " (flexibel)");
     }
     
     /**
@@ -104,7 +104,7 @@ public class UIManager {
         panelSizes.put(id, new Dimension(0, 0));  // Layouts sind flexibel
         panelHierarchy.put(id, new java.util.ArrayList<>());
         
-        System.out.println("✓ Layout registriert: " + id + " (Layout: " + layout.getClass().getSimpleName() + ")");
+        System.out.println("Layout registriert: " + id + " (Layout: " + layout.getClass().getSimpleName() + ")");
     }
     
     /**
@@ -116,7 +116,7 @@ public class UIManager {
     public void addToLayout(String layoutId, String panelId, JPanel panel, 
                            int width, int height, Object constraint) {
         if (!panels.containsKey(layoutId)) {
-            System.err.println("✗ Layout nicht gefunden: " + layoutId);
+            System.err.println("Layout nicht gefunden: " + layoutId);
             return;
         }
         
@@ -136,7 +136,7 @@ public class UIManager {
         // Hierarchie speichern
         panelHierarchy.get(layoutId).add(panelId);
         
-        System.out.println("✓ Panel hinzugefügt: " + panelId + " → " + layoutId + 
+        System.out.println("Panel hinzugefügt: " + panelId + " -> " + layoutId +
                          " (Constraint: " + constraint + ", Größe: " + width + "x" + height + ")");
     }
     
@@ -145,7 +145,7 @@ public class UIManager {
      */
     public void showPanel(String panelId) {
         if (!panels.containsKey(panelId)) {
-            System.err.println("✗ Panel nicht gefunden: " + panelId);
+            System.err.println("Panel nicht gefunden: " + panelId);
             printDebugInfo();
             return;
         }
@@ -155,15 +155,15 @@ public class UIManager {
         currentPanel = panelId;
         updateLayout();
         
-        System.out.println("✓ Panel angezeigt: " + panelId);
+        System.out.println("Panel angezeigt: " + panelId);
     }
-    
+
     /**
      * Zeigt einen Dialog/Overlay an.
      */
     public void showOverlay(JPanel dialog) {
         if (dialog == null) {
-            System.err.println("✗ Dialog darf nicht null sein!");
+            System.err.println("Dialog darf nicht null sein!");
             return;
         }
         
@@ -173,7 +173,7 @@ public class UIManager {
         overlay.setVisible(true);
         updateLayout();
         
-        System.out.println("✓ Overlay angezeigt");
+        System.out.println("Overlay angezeigt");
     }
     
     /**
@@ -185,7 +185,7 @@ public class UIManager {
         currentOverlay = null;
         updateLayout();
         
-        System.out.println("✓ Overlay versteckt");
+        System.out.println("Overlay versteckt");
     }
     
     /**
@@ -193,7 +193,7 @@ public class UIManager {
      */
     public Dimension getPanelSize(String panelId) {
         if (!panelSizes.containsKey(panelId)) {
-            System.err.println("✗ Panel nicht gefunden: " + panelId);
+            System.err.println("Panel nicht gefunden: " + panelId);
             return null;
         }
         return panelSizes.get(panelId);
@@ -220,7 +220,7 @@ public class UIManager {
      */
     public LayoutManager getPanelLayout(String panelId) {
         if (!panelLayouts.containsKey(panelId)) {
-            System.err.println("✗ Panel nicht gefunden: " + panelId);
+            System.err.println("Panel nicht gefunden: " + panelId);
             return null;
         }
         return panelLayouts.get(panelId);
@@ -276,7 +276,7 @@ public class UIManager {
             panelSizes.remove(panelId);
             panelLayouts.remove(panelId);
             panelConstraints.remove(panelId);
-            System.out.println("✓ Panel deregistriert: " + panelId);
+            System.out.println("Panel deregistriert: " + panelId);
         }
     }
     
