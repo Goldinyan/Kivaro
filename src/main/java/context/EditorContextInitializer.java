@@ -22,6 +22,7 @@ public class EditorContextInitializer {
         ctx.ctxManager.appContext.HEIGHT = screen.height;
 
         ctx.ctxManager.canvasCtx.zoom = 1f;
+        ctx.ctxManager.canvasCtx.name = "XXXX";
 
     }
 

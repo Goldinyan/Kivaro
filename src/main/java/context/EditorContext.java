@@ -3,6 +3,8 @@ package main.java.context;
 
 import main.java.core.*;
 
+import javax.swing.*;
+
 public class EditorContext {
     public Canvas canvas;
     public LayerManager layers;
@@ -10,6 +12,7 @@ public class EditorContext {
     public StateMachine states;
     public PluginManager plugins;
     public ContextManager ctxManager;
+    public JFrame window;
 }
 
 

@@ -1,4 +1,4 @@
-package main.java.ui;
+package main.java.ui.Panels;
 
 import main.java.context.EditorContext;
 

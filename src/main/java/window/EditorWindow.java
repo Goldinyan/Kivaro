@@ -4,7 +4,11 @@ import main.java.context.EditorContext;
 import main.java.context.EditorContextInitializer;
 import main.java.graphics.Layer;
 import main.java.ui.*;
+import main.java.ui.Panels.CanvasWrapper;
+import main.java.ui.Panels.LeftPanel;
+import main.java.ui.Panels.TopBarPanel;
 import main.java.ui.UIManager;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -24,8 +28,21 @@ public class EditorWindow extends JFrame
         super("Kivaro");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(new Dimension(1200, 800));
         setResizable(true);
+        setLocationRelativeTo(null);
+        setUndecorated(true);
+        /*setShape(new java.awt.geom.RoundRectangle2D.Double(
+                0, 0,
+                getWidth(),
+                getHeight(),
+                20, 20 // arcWidth, arcHeight
+        ));*/
+        // sonst geht maximize nicht
+
+
+
+        setUndecorated(true);
         setMinimumSize(new Dimension(800, 500));  // min 800px breite, 500px höhe
 
         // System.out.println("RESOURCE = " + getClass().getResource("/assets/KivaroIcon.png"));
@@ -38,12 +55,13 @@ public class EditorWindow extends JFrame
         );
 
 
-
-
-
         ctx = initContext();
 
-        JPanel mainContent = new JPanel(new BorderLayout());
+        System.out.println(ctx.ctxManager.colorCtx.getTheme().background1);
+
+        JPanel mainContent = getMainContentPanel();
+
+
         JPanel overlay = createOverlay();
         setGlassPane(overlay);
 
@@ -54,12 +72,44 @@ public class EditorWindow extends JFrame
         add(mainContent);
         uiManager.showPanel("editor");
 
-        uiManager.printDebugInfo();
-
         showCreateDialog();
         setVisible(true);
 
-        new Timer(16, e -> repaint()).start();
+
+        new Timer(8, e ->
+        {
+            repaint();
+        }).start();
+    }
+
+    @Contract(" -> new") // intellij immer neues object
+    private @NotNull JPanel getMainContentPanel()
+    {
+        return new JPanel(new BorderLayout())
+        {
+/*
+            @Override
+            protected void paintBorder(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+
+                float t = 10f;
+                g2.setColor(ctx.ctxManager.colorCtx.getTheme().border);
+                g2.setStroke(new BasicStroke(t));
+
+                int w = getWidth();
+                int h = getHeight();
+
+                g2.drawRect(
+                        (int)(t / 2),
+                        (int)(t / 2),
+                        (int)(w - t),
+                        (int)(h - t)
+                );
+
+                g2.dispose();
+            } */
+        };
+
     }
 
     private EditorContext initContext()
@@ -70,6 +120,8 @@ public class EditorWindow extends JFrame
         EditorContextInitializer.initStates(context);
         EditorContextInitializer.initColors(context);
         EditorContextInitializer.initManagers(context);
+
+        context.window = this; // DAS IST DAS JFRAME ICH HABE GAR KEIN BOCK MEHR
         return context;
     }
 
@@ -80,14 +132,14 @@ public class EditorWindow extends JFrame
         int WIDTH = ctx.ctxManager.appContext.WIDTH;
         int HEIGHT = ctx.ctxManager.appContext.HEIGHT;
 
-        int ls_width = 100;
+        int ls_width = 94;
         int ls_height = HEIGHT;
         JPanel leftSidebar = new LeftPanel(ls_width, ls_height, ctx);
 
 
-        int tb_height = 30;
+        int tb_height = 60;
         int tb_width = (int) (WIDTH - ls_width);
-        JPanel topBar = createTopBar();
+        JPanel topBar = new TopBarPanel(tb_width, tb_height, ctx);
 
 
         int rs_width = 200;
@@ -111,24 +163,15 @@ public class EditorWindow extends JFrame
     }
 
 
-    private @NotNull JPanel createTopBar()
-    {
-        JPanel topBar = new JPanel();
-        topBar.setBackground(Color.BLUE);
-        return topBar;
-    }
-
     private @NotNull JPanel createBottomBar()
     {
         JPanel bottomBar = new JPanel();
-        bottomBar.setBackground(Color.RED);
         return bottomBar;
     }
 
     private @NotNull JPanel createRightSidebar()
     {
         JPanel sidebar = new JPanel();
-        sidebar.setBackground(Color.YELLOW);
         return sidebar;
     }
 

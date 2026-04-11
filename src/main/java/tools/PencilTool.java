@@ -4,10 +4,12 @@ import main.java.core.LayerManager;
 import main.java.graphics.Layer;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class PencilTool implements Tool
 {
@@ -16,15 +18,14 @@ public class PencilTool implements Tool
     @Override
     public BufferedImage getImage()
     {
-        BufferedImage img = null;
+        // Mann muss es als BufferedImage mit imageioread sonst casten geht das nicht
         try {
-             img = ImageIO.read(new File("assets/sprite.png"));
+            return ImageIO.read(Objects.requireNonNull(
+                    getClass().getResource("/assets/PencilToolIcon.png")
+            ));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-
-        return img;
-    }
+        }    }
 
     @Override
     public void onMouseDown(MouseEvent mEv)

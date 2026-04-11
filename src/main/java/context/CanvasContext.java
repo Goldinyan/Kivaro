@@ -10,6 +10,10 @@ public class CanvasContext {
     public int HEIGHT;
     public int GRID_CELL_SIZE;
 
+    public String name;
+    public String path;
+    public boolean saved;
+
     public float zoom;
     public int worldX;
     public int worldY;

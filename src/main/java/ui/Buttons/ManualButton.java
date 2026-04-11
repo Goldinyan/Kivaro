@@ -1,4 +1,4 @@
-package main.java.ui;
+package main.java.ui.Buttons;
 
 import java.awt.*;
 import java.awt.event.*;
