@@ -1,3 +1,5 @@
+package main.java.ui;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.GeneralPath;

@@ -5,4 +5,5 @@ import main.java.context.colors.ColorContext;
 public class ContextManager {
     public CanvasContext canvasCtx;
     public ColorContext colorCtx;
+    public ApplicationContext appContext;
 }

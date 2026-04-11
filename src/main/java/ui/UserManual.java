@@ -1,3 +1,5 @@
+package main.java.ui;
+
 import main.java.ui.CanvasWrapper;
 
 import java.awt.*;

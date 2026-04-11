@@ -14,6 +14,7 @@ public class CanvasWrapper extends JPanel {
         this.ctx = ctx;
 
         setFocusable(true);
+        setPreferredSize(new Dimension(800, 600));
         // setPreferredSize(new Dimension(ctx.ctxManager.canvasCtx.MAXWIDTH, ctx.ctxManager.canvasCtx.FULLHEIGHT));
         requestFocusInWindow();
 
@@ -46,7 +47,7 @@ public class CanvasWrapper extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        // setBackground(ctx.ctxManager.colorCtx.getTheme().background1);
+        setBackground(ctx.ctxManager.colorCtx.getTheme().background1);
         super.paintComponent(g);
         ctx.states.render((Graphics2D) g);
     }

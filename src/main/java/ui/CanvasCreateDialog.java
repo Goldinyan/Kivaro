@@ -35,7 +35,6 @@ public class CanvasCreateDialog {
         gbc.gridy = 3; panel.add(heightField, gbc);
         gbc.gridy = 4; panel.add(createBtn, gbc);
 
-        // === ACTION ===
         createBtn.addActionListener(e -> {
             try {
                 int w = Integer.parseInt(widthField.getText());

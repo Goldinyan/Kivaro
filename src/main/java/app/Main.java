@@ -2,14 +2,16 @@ package main.java.app;
 
 import main.java.window.EditorWindow;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main
+{
+    static void main()
+    {
         new EditorWindow();
     }
 
 }
 
-
+// option + command + L -> formatting
 
 
 

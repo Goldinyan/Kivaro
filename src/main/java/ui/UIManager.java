@@ -5,17 +5,6 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * VOLLSTÄNDIGER UI-Manager mit Layout-Verwaltung!
- * 
- * Der UIManager weiß:
- * ✓ Welche Panels existieren
- * ✓ Wie groß jedes Panel ist
- * ✓ Welches LAYOUT jedes Panel hat (BorderLayout, GridLayout, etc.)
- * ✓ WO jedes Panel positioniert ist (WEST, CENTER, NORTH, etc.)
- * ✓ Welcher Panel gerade angezeigt wird
- * ✓ Und kann SELBST Layouts rendern
- */
 public class UIManager {
     
     // ===== CORE =====
@@ -31,7 +20,6 @@ public class UIManager {
     private final Map<String, String> panelConstraints = new HashMap<>();
     
     // ===== PANEL-HIERARCHIE =====
-    // Speichert, welche Panels in welchem Panel sind
     private final Map<String, java.util.List<String>> panelHierarchy = new HashMap<>();
     
     private String currentPanel;

@@ -3,12 +3,19 @@ package main.java.tools;
 import main.java.core.LayerManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class ToolMachine implements Tool {
     private Tool current;
 
     public void set(Tool next) {
         current = next;
+    }
+
+    @Override
+    public BufferedImage getImage()
+    {
+        return null;
     }
 
     @Override

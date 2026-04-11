@@ -40,10 +40,8 @@ public class ColorPickerPanel extends JPanel implements MouseListener, MouseMoti
     private static final int LABEL_OFFSET = 45;
     private static final int PANEL_WIDTH = 200;
 
-    private final CanvasWrapper canvasWrapper;
 
-    public ColorPickerPanel(CanvasWrapper canvasWrapper) {
-        this.canvasWrapper = canvasWrapper;
+    public ColorPickerPanel() {
         setPreferredSize(new Dimension(PANEL_WIDTH, 600));
         setBackground(Color.BLACK);
         addMouseListener(this);

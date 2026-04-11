@@ -16,9 +16,10 @@ public class EditorContextInitializer {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         ctx.ctxManager = new ContextManager();
         ctx.ctxManager.canvasCtx = new CanvasContext();
+        ctx.ctxManager.appContext = new ApplicationContext();
 
-        ctx.ctxManager.canvasCtx.MAXWIDTH = 1;
-        ctx.ctxManager.canvasCtx.MAXHEIGHT = 1;
+        ctx.ctxManager.appContext.WIDTH = screen.width;
+        ctx.ctxManager.appContext.HEIGHT = screen.height;
 
         ctx.ctxManager.canvasCtx.zoom = 1f;
 
@@ -37,6 +38,7 @@ public class EditorContextInitializer {
 
     public static void initColors(EditorContext ctx){
         ctx.ctxManager.colorCtx = new ColorContext();
+        ctx.ctxManager.colorCtx.setDarkMode(true);
         ctx.ctxManager.canvasCtx.GRID_CELL_SIZE = 32;
     }
 
