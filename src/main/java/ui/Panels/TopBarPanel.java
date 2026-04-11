@@ -16,6 +16,7 @@ public class TopBarPanel extends JPanel implements MouseListener, MouseMotionLis
     private int WIDHT, HEIGHT;
     private EditorContext ctx;
     private final int LEFT_PANEL_PADDING = 94;
+    private Point clickOffset = null;
 
 
     public TopBarPanel(int WIDTH, int HEIGHT, EditorContext ctx)
@@ -104,15 +105,30 @@ public class TopBarPanel extends JPanel implements MouseListener, MouseMotionLis
     }
 
     @Override
-    public void mousePressed(MouseEvent e)
-    {
+    public void mousePressed(MouseEvent e) {
+        // Nur wenn wir nicht im Resize-Border sind (oben 6px), dann fenster bewegen
+        if (e.getY() >= 6) {
+            clickOffset = e.getPoint();
+        }
+    }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (clickOffset == null) return;
+
+        if (e.getY() <= 6) return;
+
+        Point screen = e.getLocationOnScreen();
+        ctx.window.setLocation(
+                screen.x - clickOffset.x,
+                screen.y - clickOffset.y
+        );
     }
 
     @Override
     public void mouseReleased(MouseEvent e)
     {
-
+        clickOffset = null;
     }
 
     @Override
@@ -127,11 +143,6 @@ public class TopBarPanel extends JPanel implements MouseListener, MouseMotionLis
 
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e)
-    {
-
-    }
 
     @Override
     public void mouseMoved(MouseEvent e)

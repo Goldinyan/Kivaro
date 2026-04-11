@@ -75,6 +75,8 @@ public class EditorWindow extends JFrame
         showCreateDialog();
         setVisible(true);
 
+        new WindowResizeHandler(this, overlay);
+
 
         new Timer(8, e ->
         {
@@ -107,12 +109,12 @@ public class EditorWindow extends JFrame
                 );
 
                 g2.dispose();
-            } */
+            }  */
         };
 
     }
 
-    private EditorContext initContext()
+    private @NotNull EditorContext initContext()
     {
         EditorContext context = new EditorContext();
         EditorContextInitializer.initScreen(context);
@@ -209,7 +211,7 @@ public class EditorWindow extends JFrame
         BlurredOverlay overlay = new BlurredOverlay();
         overlay.setOpaque(false);
         overlay.setLayout(new BorderLayout());
-        overlay.setVisible(false);
+        overlay.setVisible(true);  // Immer sichtbar, damit Events durchkommen
         return overlay;
     }
 
