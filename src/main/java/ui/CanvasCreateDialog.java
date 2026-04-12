@@ -3,21 +3,31 @@ package main.java.ui;
 import javax.swing.*;
 import java.awt.*;
 import main.java.context.EditorContext;
+import main.java.ui.Panels.TopBarPanel;
+import main.java.ui.Panels.TopLeftButtonsPanel;
 
-public class CanvasCreateDialog {
+public class CanvasCreateDialog extends JFrame {
 
     private final EditorContext ctx;
-    private final UIManager uiManager;
+    private final Runnable onFinish;
 
-    public CanvasCreateDialog(EditorContext ctx, UIManager uiManager) {
+    public CanvasCreateDialog(EditorContext ctx, Runnable func) {
         this.ctx = ctx;
-        this.uiManager = uiManager;
+        this.onFinish = func;
+
+        setLayout(new BorderLayout());
     }
 
     public JPanel build() {
+        JPanel wrapper = new JPanel(new GridBagLayout()); // zentriert
+        wrapper.setOpaque(false); // Overlay-Hintergrund bleibt sichtbar
+
+        TopBarPanel topBarPanel = new TopBarPanel(getWidth(), 50, ctx);
+        add(topBarPanel, BorderLayout.NORTH);
+
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(400, 250));
-        panel.setBackground(new Color(240, 240, 240));
+        panel.setBackground(ctx.ctxManager.colorCtx.getTheme().background2);
         panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         panel.setLayout(new GridBagLayout());
 
@@ -35,6 +45,9 @@ public class CanvasCreateDialog {
         gbc.gridy = 3; panel.add(heightField, gbc);
         gbc.gridy = 4; panel.add(createBtn, gbc);
 
+        wrapper.add(panel); // zentriert, ohne zu stretchen
+
+
         createBtn.addActionListener(e -> {
             try {
                 int w = Integer.parseInt(widthField.getText());
@@ -43,7 +56,8 @@ public class CanvasCreateDialog {
                 ctx.ctxManager.canvasCtx.WIDTH = w;
                 ctx.ctxManager.canvasCtx.HEIGHT = h;
 
-                uiManager.hideOverlay();
+                onFinish.run();
+
 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(panel,
@@ -53,6 +67,6 @@ public class CanvasCreateDialog {
             }
         });
 
-        return panel;
+        return wrapper;
     }
 }

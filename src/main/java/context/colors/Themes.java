@@ -7,6 +7,8 @@ public class Themes {
     public static final Theme LIGHT = new Theme(
             new Color(245, 245, 245), // sehr helles Grau (fast weiß) – typischer Hintergrund
             new Color(230, 230, 230), // helles Grau – Panels, Sidebar
+            new Color(10, 10 ,10),
+            new Color(20, 20, 20),
             new Color(20, 20, 20),
             new Color(40, 40, 40),
             new Color(0, 120, 215),   // Windows-Blue – Akzentfarbe / Auswahl
@@ -18,7 +20,9 @@ public class Themes {
 
     public static final Theme DARK = new Theme(
             new Color(42, 41, 41),    // sehr dunkles Grau – Haupt-Hintergrund
-            new Color(37, 39, 39),    // dunkles Grau – Panels, Sidebar
+            new Color(37, 39, 39),  // dunkles Grau – Panels, Sidebar
+            new Color(30, 30, 30),
+            new Color(45, 45, 45),
             new Color(230, 230, 230),   // sehr helles Grau – Text / Icons
             new Color(180, 180, 180),
             new Color(107, 106, 106),

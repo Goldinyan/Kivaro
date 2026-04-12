@@ -20,8 +20,8 @@ import java.util.Objects;
 public class EditorWindow extends JFrame
 {
 
-    private final UIManager uiManager;
-    private final EditorContext ctx;
+    private EditorContext ctx;
+    private UIManager uiManager;
 
     public EditorWindow()
     {
@@ -40,9 +40,6 @@ public class EditorWindow extends JFrame
         ));*/
         // sonst geht maximize nicht
 
-
-
-        setUndecorated(true);
         setMinimumSize(new Dimension(800, 500));  // min 800px breite, 500px höhe
 
         // System.out.println("RESOURCE = " + getClass().getResource("/assets/KivaroIcon.png"));
@@ -55,7 +52,7 @@ public class EditorWindow extends JFrame
         );
 
 
-        ctx = initContext();
+        ctx = Helper.initContext(this);
 
         System.out.println(ctx.ctxManager.colorCtx.getTheme().background1);
 
@@ -67,21 +64,24 @@ public class EditorWindow extends JFrame
 
         uiManager = new UIManager(mainContent, overlay);
 
-        buildLayout();
+       buildLayout();
 
         add(mainContent);
         uiManager.showPanel("editor");
 
-        showCreateDialog();
+        //showCreateDialog();
+        openNewWindow();
         setVisible(true);
 
         new WindowResizeHandler(this, overlay);
 
 
-        new Timer(8, e ->
+        Timer GLOBAL_RENDER_TIMER = new Timer(16, e ->
         {
             repaint();
-        }).start();
+        });
+
+        GLOBAL_RENDER_TIMER.start();
     }
 
     @Contract(" -> new") // intellij immer neues object
@@ -114,18 +114,7 @@ public class EditorWindow extends JFrame
 
     }
 
-    private @NotNull EditorContext initContext()
-    {
-        EditorContext context = new EditorContext();
-        EditorContextInitializer.initScreen(context);
-        EditorContextInitializer.initTools(context);
-        EditorContextInitializer.initStates(context);
-        EditorContextInitializer.initColors(context);
-        EditorContextInitializer.initManagers(context);
 
-        context.window = this; // DAS IST DAS JFRAME ICH HABE GAR KEIN BOCK MEHR
-        return context;
-    }
 
     private void buildLayout()
     {
@@ -168,12 +157,14 @@ public class EditorWindow extends JFrame
     private @NotNull JPanel createBottomBar()
     {
         JPanel bottomBar = new JPanel();
+        bottomBar.setBackground(ctx.ctxManager.colorCtx.getTheme().background4);
         return bottomBar;
     }
 
     private @NotNull JPanel createRightSidebar()
     {
         JPanel sidebar = new JPanel();
+        sidebar.setBackground(ctx.ctxManager.colorCtx.getTheme().background3);
         return sidebar;
     }
 
@@ -206,6 +197,15 @@ public class EditorWindow extends JFrame
         return wrapper;
     }
 
+    public void openNewWindow() {
+        JFrame win = new JFrame("Canvas Settings");
+        win.add(new CanvasCreateDialog(ctx, this::buildLayout).build());
+        win.pack();
+        win.setLocationRelativeTo(null);
+        win.setVisible(true);
+    }
+
+
     private @NotNull JPanel createOverlay()
     {
         BlurredOverlay overlay = new BlurredOverlay();
@@ -215,11 +215,11 @@ public class EditorWindow extends JFrame
         return overlay;
     }
 
-    private void showCreateDialog()
-    {
-        CanvasCreateDialog dialog = new CanvasCreateDialog(ctx, uiManager);
-        uiManager.showOverlay(dialog.build());
-    }
+//    private void showCreateDialog()
+//    {
+//        CanvasCreateDialog dialog = new CanvasCreateDialog(ctx, uiManager);
+//        uiManager.showOverlay(dialog.build());
+//    }
 
     public UIManager getUIManager()
     {

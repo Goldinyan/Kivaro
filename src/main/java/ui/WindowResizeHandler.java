@@ -1,6 +1,6 @@
 package main.java.ui;
 
-// MADE BY KI
+// MADE BY KI - Die Idee zumindest
 
 
 import javax.swing.*;
@@ -23,8 +23,9 @@ public class WindowResizeHandler {
 
     public WindowResizeHandler(JFrame window, Component glassPane) {
         this.window = window;
-        
-        // Globaler AWTEventListener - bekommt ALLE Events, egal wer sie konsumiert
+
+
+        // Globaler AWTEventListener bekommt ALLE Events egal ob we wer sie konsumiert
         AWTEventListener listener = event -> {
             if (!(event instanceof MouseEvent)) return;
             MouseEvent e = (MouseEvent) event;

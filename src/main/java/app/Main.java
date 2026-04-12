@@ -1,12 +1,13 @@
 package main.java.app;
 
 import main.java.window.EditorWindow;
+import main.java.window.StartWindow;
 
 public class Main
 {
     static void main()
     {
-        new EditorWindow();
+        new StartWindow();
     }
 
 }
