@@ -27,8 +27,8 @@ public class Themes {
             new Color(180, 180, 180),
             new Color(107, 106, 106),
             new Color(66, 67, 67),    // mittleres Dunkelgrau – Border / Linien
-            new Color(57, 57, 56), // neutrales Grau – sekundärer Text / Icons
-            new Color(190, 190, 190)  // helles Grau – Hover / leichte Highlights
+            new Color(72, 72, 72), // neutrales Grau – sekundärer Text / Icons 57 57 56
+            new Color(255, 255, 255)  // helles Grau – Hover / leichte Highlights
     );
 
 }

@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 public interface Tool {
     BufferedImage getImage();
 
-    void onMouseDown(MouseEvent mEv);
-    void onMouseDrag(MouseEvent mEv);
-    void onMouseUp(MouseEvent mEv);
+    void onMouseDown(MouseEventContext mEv);
+    void onMouseDrag(MouseEventContext mEv);
+    void onMouseUp(MouseEventContext mEv);
     void renderPreview(Graphics2D g);
 
 }

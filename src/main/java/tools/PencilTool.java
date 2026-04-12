@@ -28,21 +28,21 @@ public class PencilTool implements Tool
         }    }
 
     @Override
-    public void onMouseDown(MouseEvent mEv)
+    public void onMouseDown(MouseEventContext mEv)
     {
 
     }
 
     @Override
-    public void onMouseDrag(MouseEvent mEv)
+    public void onMouseDrag(MouseEventContext mEv)
     {
         Layer layer = mEv.lm.getActive();
-        layer.getImage().setRGB(mEv.x, mEv.y, currColor.getRGB());
+        //layer.getImage().setRGB(mEv.x, mEv.y, currColor.getRGB());
     }
 
 
     @Override
-    public void onMouseUp(MouseEvent mEv)
+    public void onMouseUp(MouseEventContext mEv)
     {
 
     }

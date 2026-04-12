@@ -41,6 +41,12 @@ public class Canvas {
         int worldX = ctx.ctxManager.canvasCtx.worldX;
         int worldY = ctx.ctxManager.canvasCtx.worldY;
 
+        if(ctx.layers.getActive() == null){
+            System.out.println("No layer");
+            return;
+        }
+
+
         int width = ctx.layers.getActive().getImage().getWidth();
         int height = ctx.layers.getActive().getImage().getHeight();
 
@@ -57,8 +63,8 @@ public class Canvas {
 
         // System.out.println(startCellX + " " + startCellY);
 
-        for (int cx = startCellX; cx * cell < width; cx++) {
-            for (int cy = startCellY; cy * cell < height; cy++) {
+        for (int cx = startCellX; cx * cell < width * cell; cx++) {
+            for (int cy = startCellY; cy * cell < height * cell; cy++) {
 
                 boolean even = ((cx + cy) & 1) == 0;
                 g.setColor(even ? theme.grid1 : theme.grid2);

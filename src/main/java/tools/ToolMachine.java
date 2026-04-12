@@ -1,7 +1,5 @@
 package main.java.tools;
 
-import main.java.core.LayerManager;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -19,17 +17,17 @@ public class ToolMachine implements Tool {
     }
 
     @Override
-    public void onMouseDown(MouseEvent mEv) {
+    public void onMouseDown(MouseEventContext mEv) {
         current.onMouseDown(mEv);
     }
 
     @Override
-    public void onMouseDrag(MouseEvent mEv) {
+    public void onMouseDrag(MouseEventContext mEv) {
         current.onMouseDrag(mEv);
     }
 
     @Override
-    public void onMouseUp(MouseEvent mEv) {
+    public void onMouseUp(MouseEventContext mEv) {
     }
 
     public Tool getTool(){

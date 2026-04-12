@@ -3,6 +3,7 @@ package main.java.ui;
 import javax.swing.*;
 import java.awt.*;
 import main.java.context.EditorContext;
+import main.java.graphics.Layer;
 import main.java.ui.Panels.TopBarPanel;
 import main.java.ui.Panels.TopLeftButtonsPanel;
 
@@ -35,8 +36,8 @@ public class CanvasCreateDialog extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JTextField widthField = new JTextField("800");
-        JTextField heightField = new JTextField("600");
+        JTextField widthField = new JTextField("32");
+        JTextField heightField = new JTextField("32");
         JButton createBtn = new JButton("Create");
 
         gbc.gridy = 0; panel.add(new JLabel("Canvas Width:"), gbc);
@@ -53,8 +54,12 @@ public class CanvasCreateDialog extends JFrame {
                 int w = Integer.parseInt(widthField.getText());
                 int h = Integer.parseInt(heightField.getText());
 
+
+                ctx.layers.addLayer(new Layer(w, h, "Layer 1"));
                 ctx.ctxManager.canvasCtx.WIDTH = w;
                 ctx.ctxManager.canvasCtx.HEIGHT = h;
+
+                System.out.println(ctx.layers.getAll());
 
                 onFinish.run();
 

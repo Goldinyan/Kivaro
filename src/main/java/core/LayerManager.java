@@ -11,11 +11,13 @@ public class LayerManager {
 
     public void addLayer(Layer layer) {
         layers.add(layer);
+        System.out.println("layer added");
     }
 
     public void removeLayerAt(int i){ layers.remove(i); }
 
     public Layer getActive() {
+        if(layers.isEmpty()) return null;
         return layers.get(activeIndex);
     }
 

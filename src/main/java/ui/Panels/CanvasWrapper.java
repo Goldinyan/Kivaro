@@ -15,7 +15,6 @@ public class CanvasWrapper extends JPanel {
 
         setFocusable(true);
         setPreferredSize(new Dimension(800, 600));
-        // setPreferredSize(new Dimension(ctx.ctxManager.canvasCtx.MAXWIDTH, ctx.ctxManager.canvasCtx.FULLHEIGHT));
         requestFocusInWindow();
 
 
@@ -24,12 +23,12 @@ public class CanvasWrapper extends JPanel {
         MouseListener mouseListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                ctx.states.mouseDown(e.getX(), e.getY());
+                ctx.states.mouseDown(e.getX(), e.getY(), e);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                ctx.states.mouseUp(e.getX(), e.getY());
+                ctx.states.mouseUp(e.getX(), e.getY(), e);
             }
         };
         addMouseListener(mouseListener);
@@ -38,7 +37,7 @@ public class CanvasWrapper extends JPanel {
         MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                ctx.states.mouseDrag(e.getX(), e.getY());
+                ctx.states.mouseDrag(e.getX(), e.getY(), e);
             }
         };
         addMouseMotionListener(mouseMotionListener);
@@ -49,8 +48,13 @@ public class CanvasWrapper extends JPanel {
     protected void paintComponent(Graphics g) {
         setBackground(ctx.ctxManager.colorCtx.getTheme().background1);
         super.paintComponent(g);
+
         ctx.states.render((Graphics2D) g);
     }
+
+
+
+
 }
 
 

@@ -23,9 +23,11 @@ public class EditorWindow extends JFrame
     private EditorContext ctx;
     private UIManager uiManager;
 
-    public EditorWindow()
+    public EditorWindow(EditorContext ctx)
     {
         super("Kivaro");
+
+        this.ctx = ctx;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(1200, 800));
@@ -51,8 +53,7 @@ public class EditorWindow extends JFrame
                 new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/KivaroIcon.png"))).getImage()
         );
 
-
-        ctx = Helper.initContext(this);
+        ctx.window = this;
 
         System.out.println(ctx.ctxManager.colorCtx.getTheme().background1);
 
@@ -64,13 +65,13 @@ public class EditorWindow extends JFrame
 
         uiManager = new UIManager(mainContent, overlay);
 
-       buildLayout();
+        buildLayout();
 
         add(mainContent);
         uiManager.showPanel("editor");
 
         //showCreateDialog();
-        openNewWindow();
+        //openNewWindow();
         setVisible(true);
 
         new WindowResizeHandler(this, overlay);
@@ -175,24 +176,6 @@ public class EditorWindow extends JFrame
 
         CanvasWrapper canvasWrapper = new CanvasWrapper(ctx);
         wrapper.add(canvasWrapper, BorderLayout.CENTER);
-
-        wrapper.addComponentListener(new ComponentAdapter()
-        {
-            @Override
-            public void componentResized(ComponentEvent e)
-            {
-                ctx.ctxManager.canvasCtx.MAXWIDTH = wrapper.getWidth();
-                ctx.ctxManager.canvasCtx.MAXHEIGHT = wrapper.getHeight();
-                ctx.ctxManager.canvasCtx.WIDTH = (int) (wrapper.getWidth() * 0.7);
-                ctx.ctxManager.canvasCtx.HEIGHT = (int) (wrapper.getHeight() * 0.7);
-                ctx.ctxManager.canvasCtx.worldX =
-                        (ctx.ctxManager.canvasCtx.MAXWIDTH - ctx.ctxManager.canvasCtx.WIDTH) / 2;
-                ctx.ctxManager.canvasCtx.worldY =
-                        (ctx.ctxManager.canvasCtx.MAXHEIGHT - ctx.ctxManager.canvasCtx.HEIGHT) / 2;
-            }
-        });
-
-        ctx.layers.addLayer(new Layer(30, 30, "Layer 1"));
 
         return wrapper;
     }
